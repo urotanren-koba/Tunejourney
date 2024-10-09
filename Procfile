@@ -1,2 +1,2 @@
-web: gunicorn spotify_app.wsgi --log-file -
+web: gunicorn spotify_streaming_app.wsgi --log-file -
 
