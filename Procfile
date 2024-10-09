@@ -1,2 +1,2 @@
-web: gunicorn tunejourney.wsgi --log-file -
+web: gunicorn spotify_app.wsgi --log-file -
 
