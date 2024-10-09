@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tunejourney</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'music_search/images/image_fx_ (49).jpg' %}">
+
+    <!-- BootstrapのCDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- カスタムスタイル -->
+    <style>
+        /* ゼロ重力テーマのカスタムスタイル */
+        body {
+            background-image: url("{% static 'music_search/images/image_fx_ (50).jpg' %}");
+            background-size: cover;
+            transition: background 2s ease;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 5rem; /* Increased from 4rem to 5rem */
+            color: #024ada;
+            text-shadow: 0 0 20px;
+            padding-top: 100px;
+            padding-bottom: 50px; /* Increased from 30px to 50px */
+        }
+
+        .btn-link {
+            display: block;
+            width: 85%; /* Decreased from 90% to 85% */
+            max-width: 450px; /* Decreased from 500px to 450px */
+            margin: 25px auto; /* Decreased from 30px to 25px */
+            padding: 18px 36px; /* Decreased from 20px 40px to 18px 36px */
+            text-align: center;
+            background: radial-gradient(circle, #21e3fd, #024ada);
+            color: #fff;
+            border-radius: 55px; /* Decreased from 60px to 55px */
+            font-size: 1.8rem; /* Decreased from 2rem to 1.8rem */
+            text-decoration: none;
+            box-shadow: 0 0 18px rgba(255, 255, 255, 0.4); /* Slightly decreased shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-link:hover {
+            transform: scale(1.12); /* Decreased from 1.15 to 1.12 */
+            box-shadow: 0 0 25px #ffdd57, 0 0 35px #ff8800; /* Slightly decreased shadow */
+        }
+
+    </style>
+</head>
+<body class="container">
+    <h1 class="my-4 text-center">Tunejourney</h1>
+
+    <!-- 音楽検索ページへのリンク -->
+    <a href="{% url 'music_search' %}" class="btn-link">listen to?(検索)</a>
+
+    <!-- 音楽ランダム再生ページへのリンク -->
+    <a href="{% url 'random_preview' %}" class="btn-link">Journey(ランダム再生)</a>
+    <!-- アーティストニュースページへのリンク -->
+    <a href="{% url 'artist_news' %}" class="btn-link">News</a>
+</body>
+</html>
+

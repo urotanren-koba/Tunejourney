@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listen to?</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'music_search/images/image_fx_ (49).jpg' %}">
+
+    <!-- BootstrapのCDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- カスタムスタイル -->
+    <style>
+        /* ゼロ重力テーマのカスタムスタイル */
+        body {
+            background-image: url("{% static 'music_search/images/image_fx_ (50).jpg' %}");
+            background-size: cover;
+            transition: background 2s ease;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 4rem;
+            color: #024ada;
+            text-shadow: 0 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .form-control, .btn {
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.2rem;
+            padding: 15px;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+        }
+
+        /* 入力欄とボタンを中央に配置 */
+        #search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        #search-container .form-control {
+            width: 60%;
+            margin: 10px;
+        }
+
+        #search-container .btn {
+            padding: 15px 30px;
+            margin: 10px;
+            background: radial-gradient(circle, #21e3fd, #024ada);
+            color: #fff;
+            border-radius: 50px;
+            font-size: 1.2rem;
+        }
+
+        /* ボタンのホバーエフェクト */
+        #search-container .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ffdd57, 0 0 30px #ff8800;
+        }
+
+        /* カードスタイルの調整 */
+        .card {
+            background-color: rgba(30, 30, 30, 0.8);
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .album-cover {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* プレビューボタンのデザイン強化 */
+        .btn-preview {
+            background: radial-gradient(circle, #ffdd57, #ff8800);
+            color: #fff;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* プレビューボタンの星のエフェクト */
+        .btn-preview:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px #21e3fd, 0 0 40px #024ada;
+        }
+
+        #stop-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: #ff4c4c;
+            color: #fff;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* ホバー時のエフェクト */
+        #stop-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ff4c4c, 0 0 30px #ff0000;
+        }
+
+        /* ヘッダーのスタイル */
+        .navbar {
+            background: linear-gradient(to right, rgba(33, 227, 253, 0.8), rgba(2, 74, 218, 0.8));
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 0 15px 15px;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            font-size: 1.6rem;
+            margin: 0 60px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffdd57;
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #ffdd57;
+            text-shadow: 0 0 10px rgba(255, 221, 87, 0.5);
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body class="container">
+    <!-- ヘッダーメニューの追加 -->
+    <nav class="navbar">
+        <a href="{% url 'top_page' %}">TOP</a>
+        <a href="{% url 'music_search' %}">listen to? (検索)</a>
+        <a href="{% url 'random_preview' %}">Journey (ランダム再生)</a>
+        <a href="{% url 'artist_news' %}">News</a>
+    </nav>
+
+    <h1 class="my-4 text-center"><a href="{% url 'top_page' %}" style="color: inherit; text-decoration: none;">listen to?</a></h1>
+
+    <!-- 検索フォームの追加 -->
+    <form method="GET" action="{% url 'music_search' %}" class="mb-5">
+        <div id="search-container">
+            <input type="text" id="search-query" name="query" class="form-control" placeholder="聴きたい曲へご案内します">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+        <!-- 停止ボタンを追加 -->
+        <button id="stop-button" class="btn btn-danger" style="display: none;" onclick="stopPreview(event)">Stop Preview</button>
+    </form>
+
+    <!-- 検索結果の表示 -->
+    <div class="row track-container">
+        {% for track in tracks %}
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            {% if track.album.images %}
+                                <img src="{{ track.album.images.0.url }}" alt="Album Cover" class="album-cover img-fluid">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ track.name }}</h5>
+                                <a href="{{ track.external_urls.spotify }}" target="_blank" class="btn btn-outline-info">Listen on Spotify</a>
+                                {% if track.preview_url %}
+                                    <button onclick="playPreview('{{ track.preview_url }}')" class="btn btn-primary btn-sm btn-preview">Preview</button>
+                                {% else %}
+                                    <p class="text-muted mt-2">No Preview Available</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        let currentAudio = null;
+        const backgrounds = ['starry_sky_1.jpg', 'starry_sky_2.jpg', 'starry_sky_3.jpg', 'starry_sky_4.jpg'];
+        let currentPage = 1;
+
+        function playPreview(url) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            currentAudio = new Audio(url);
+            currentAudio.play();
+
+            document.getElementById('stop-button').style.display = 'block';
+        }
+
+        function stopPreview(event) {
+            if (event) {
+                event.preventDefault();
+            }
+
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentAudio = null;
+
+                document.getElementById('stop-button').style.display = 'none';
+            }
+        }
+
+        // インフィニットスクロールの実装
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+                loadMoreTracks();
+            }
+        });
+
+        function loadMoreTracks() {
+            currentPage++;
+            const query = document.getElementById('search-query').value || 'Jazz';
+            const searchType = 'track';
+
+            fetch(`/api/track-search?page=${currentPage}&query=${query}&type=${searchType}`)
+                .then(response => response.json())
+                .then(data => {
+                    const trackContainer = document.querySelector('.track-container');
+                    data.tracks.forEach(track => {
+                        const trackElement = createTrackElement(track);
+                        trackContainer.appendChild(trackElement);
+                    });
+                })
+                .catch(error => console.error('Error fetching more tracks:', error));
+        }
+
+        function createTrackElement(track) {
+            const trackCard = document.createElement('div');
+            trackCard.classList.add('col-md-6');
+
+            trackCard.innerHTML = `
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            ${track.album.images[0] ? `<img src="${track.album.images[0].url}" alt="Album Cover" class="album-cover img-fluid">` : ''}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">${track.name}</h5>
+                                <p class="card-text">by ${track.artists.map(artist => artist.name).join(', ')}</p>
+                                <a href="${track.external_urls.spotify}" target="_blank" class="btn btn-outline-info">Listen on Spotify</a>
+                                ${track.preview_url ? `<button onclick="playPreview('${track.preview_url}')" class="btn btn-primary btn-sm btn-preview">Preview</button>` : '<p class="text-muted mt-2">No Preview Available</p>'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return trackCard;
+        }
+    </script>
+</body>
+</html>
