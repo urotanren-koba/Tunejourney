@@ -147,6 +147,66 @@
         .navbar a:hover::after {
             width: 100%;
         }
+
+        /* スマートフォン用のレスポンシブ対応 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .form-control, .btn {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            #search-container {
+                padding: 10px;
+            }
+
+            #search-container .form-control {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            #search-container .btn {
+                width: 100%;
+                margin: 5px 0;
+                padding: 10px 20px;
+            }
+
+            .navbar {
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+                margin: 0 20px;
+            }
+
+            .news-card {
+                margin-bottom: 20px;
+                padding: 15px;
+            }
+
+            .news-card h5 {
+                font-size: 1.2rem;
+            }
+
+            .news-card p {
+                font-size: 0.9rem;
+            }
+
+            .btn-outline-primary {
+                font-size: 0.9rem;
+                padding: 5px 10px;
+            }
+        }
     </style>
 </head>
 <body class="container">

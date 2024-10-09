@@ -173,6 +173,61 @@
             width: 100%;
         }
 
+        /* スマートフォン用のレスポンシブデザイン */
+        @media (max-width: 767px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            #search-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            #search-container .form-control {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            #search-container .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .navbar {
+                padding: 10px;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+                margin: 0 20px;
+            }
+
+            .card {
+                padding: 10px;
+            }
+
+            .album-cover {
+                width: 80px;
+                height: 80px;
+            }
+
+            .btn-preview {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+
+            #stop-button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+
     </style>
 </head>
 <body class="container">

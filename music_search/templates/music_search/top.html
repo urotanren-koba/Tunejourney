@@ -52,6 +52,32 @@
             box-shadow: 0 0 25px #ffdd57, 0 0 35px #ff8800; /* Slightly decreased shadow */
         }
 
+        /* スマートフォン用のレスポンシブ対応 */
+        @media (max-width: 767px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 3rem;
+                padding-top: 50px;
+                padding-bottom: 30px;
+            }
+
+            .btn-link {
+                width: 95%;
+                max-width: none;
+                margin: 15px auto;
+                padding: 15px 30px;
+                font-size: 1.5rem;
+                border-radius: 45px;
+            }
+
+            .btn-link:hover {
+                transform: scale(1.05);
+            }
+        }
+
     </style>
 </head>
 <body class="container">
